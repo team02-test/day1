@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiply Callback Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            margin: 5px;
+            padding: 5px;
+            width: 80px;
+        }
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>곱셈 콜백 함수</h2>
+
+    <input type="number" id="num1" placeholder="숫자 1">
+    <input type="number" id="num2" placeholder="숫자 2">
+    <br><br>
+
+    <button onclick="handleMultiply()">계산하기</button>
+
+    <p id="result"></p>
+
+    <script>
+        // 두 정수의 곱셈, 결과에 2를 곱해서 콜백으로 전달
+        const multiply = (number1, number2, callback) => {
+            const result = number1 * number2 * 2;
+
+            if (callback) {
+                callback(result);
+            }
+
+            return result;
+        };
+
+        // 화면에 출력하는 콜백 함수
+        const showResult = (value) => {
+            document.getElementById("result").textContent =
+                `결과는 ${value} 입니다.`;
+        };
+
+        // 버튼 클릭 시 실행되는 함수
+        const handleMultiply = () => {
+            const num1 = Number(document.getElementById("num1").value);
+            const num2 = Number(document.getElementById("num2").value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("숫자를 모두 입력하세요!");
+                return;
+            }
+
+            multiply(num1, num2, showResult);
+        };
+    </script>
+
+</body>
+</html>
